@@ -12,7 +12,8 @@ Library         String
 Library         RPA.PDF                   # PDF functions 
 Library         RPA.Archive               # Zip file
 Library         RPA.Robocloud.Secrets
-Library         RPA.Dialogs
+# Library         RPA.Dialogs
+Library         Dialogs
 Suite Setup     Open the robot website
 
 *** Variables ***
@@ -67,11 +68,13 @@ Close the annoying modal
     ${isDialogVisible}=       Run Keyword And Return Status     Element Should Be Visible   ${Dialog}      
     Run Keyword If            ${isDialogVisible}                Click Button                ${ButtonOK} 
 Collect Search Query From User
-    Add heading        Input URL of order file
-    Add Text Input    search    label= Search query
-    Add Text    URL : "https://robotsparebinindustries.com/orders.csv"
-    ${response}=    Run dialog
-    [Return]    ${response.search}
+    # Add heading        Input URL of order file
+    # Add Text Input    search    label= Search query
+    # Add Text    URL : "https://robotsparebinindustries.com/orders.csv"
+    # ${response}=    Run dialog
+    ${response} =	Get Value From User  Input URL to dowload
+    [Return]    ${response}
+    # ${response} =	Get Value From User	Input user name	default
 
 Download Order file to Download Dir 
     ${urlOrder}=     Collect Search Query From User
